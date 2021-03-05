@@ -2,10 +2,13 @@
 #include "matrix.h"
 
 Matrix::Matrix() {
+    name = 0;
+    numOfRows = 0;
+    numOfColumns = 0;
     value = nullptr;
 }
 
-Matrix::Matrix(char newName, int newNOR, int newNOC) {
+Matrix::Matrix(unsigned char newName, unsigned int newNOR, unsigned int newNOC) {
     name = newName;
     numOfRows = newNOR;
     numOfColumns = newNOC;
@@ -15,7 +18,7 @@ Matrix::Matrix(char newName, int newNOR, int newNOC) {
         value[i] = new double[numOfColumns];
 }
 
-Matrix::Matrix(char newName, Matrix &source) {
+Matrix::Matrix(unsigned char newName, Matrix &source) {
     name = newName;
     numOfRows = source.getNOR();
     numOfColumns = source.getNOC();
@@ -34,23 +37,23 @@ Matrix::~Matrix() {
     delete [] value;
 }
 
-char Matrix::getName() const {
+unsigned char Matrix::getName() const {
     return name;
 }
 
-int Matrix::getNOR() const {
+unsigned int Matrix::getNOR() const {
     return numOfRows;
 }
 
-int Matrix::getNOC() const {
+unsigned int Matrix::getNOC() const {
     return numOfColumns;
 }
 
-double Matrix::getValue(int i, int j) const {
+double Matrix::getValue(unsigned int i, unsigned int j) const {
     return value[i][j];
 }
 
-void Matrix::setValue(int i, int j, double newValue) {
+void Matrix::setValue(unsigned int i, unsigned int j, double newValue) {
     if(i < numOfRows && j < numOfColumns)
         value[i][j] = newValue;
     else
@@ -65,9 +68,9 @@ void Matrix::expand(Matrix &addition) {
 
         for(int i = 0; i < numOfRows; i++) {
             tmpValue[i] = new double[numOfColumns + addition.getNOC()];
-            for(int j = 0; j < numOfColumns; j++)
+            for(unsigned int j = 0; j < numOfColumns; j++)
                 tmpValue[i][j] = value[i][j];
-            for(int j = numOfColumns; j < numOfColumns + addition.getNOC(); j++)
+            for(unsigned int j = numOfColumns; j < numOfColumns + addition.getNOC(); j++)
                 tmpValue[i][j] = addition.getValue(i, j - numOfColumns);
         }
 

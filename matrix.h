@@ -2,23 +2,23 @@
 
 class Matrix {
 private:
-    char name{};
-    int numOfRows{};
-    int numOfColumns{};
+    unsigned char name;
+    unsigned int numOfRows;
+    unsigned int numOfColumns;
     double **value;
 
 public:
     Matrix();
-    Matrix(char newName, int newNOR, int newNOC);
-    Matrix(char newName, Matrix &source);
+    Matrix(unsigned char newName, unsigned int newNOR, unsigned int newNOC);
+    Matrix(unsigned char newName, Matrix &source);
     ~Matrix();
 
-    char getName() const;
-    int getNOR() const;
-    int getNOC() const;
+    unsigned char getName() const;
+    unsigned int getNOR() const;
+    unsigned int getNOC() const;
 
-    double getValue(int i, int j) const;
-    void setValue(int i, int j, double newValue);
+    double getValue(unsigned int i, unsigned int j) const;
+    void setValue(unsigned int i, unsigned int j, double newValue);
 
     void expand(Matrix &addition);
     void modify(double (*func)(double) = nullptr);
